@@ -9,7 +9,6 @@ class App extends React.Component {
         hyva: 0,
         neutraali: 0,
         huono: 0,
-        keskiarvo: 0
       }
     }
   

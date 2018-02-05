@@ -16,6 +16,7 @@ class App extends React.Component {
   }
 
 
+
   componentDidMount() {
     personService
     .getAll()
@@ -26,12 +27,10 @@ class App extends React.Component {
   }
 
   handleNameChange = (event) => {
-    console.log(event.target.value)
     this.setState({ newName: event.target.value })
   }
 
   handleNumberChange = (event) => {
-      console.log(event.target.value)
       this.setState({ newPhone: event.target.value })
   }
 
@@ -41,6 +40,7 @@ class App extends React.Component {
       name: this.state.newName,
       phone: this.state.newPhone
     }
+  
   
     const dup = this.checkDuplicates()
 
@@ -64,8 +64,6 @@ class App extends React.Component {
   }  
 
   render() {
-
-    console.log(this.state.persons)
     return (
       <div>
         <h2>Puhelinluettelo</h2>
@@ -83,7 +81,7 @@ class App extends React.Component {
         </form>
         <h2>Numerot</h2>
         <ul>
-          <Person person={this.state.persons} />
+          <Person persons={this.state.persons} delete={this.handleDeleteButton} />
         </ul>
       </div>
     )

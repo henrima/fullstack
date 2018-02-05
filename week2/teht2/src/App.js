@@ -1,7 +1,7 @@
 import React from 'react';
 import Person from './components/Person'
 import FilterPerson from './components/FilterPerson'
-import axios from 'axios'
+import personService from './services/person'
 
 
 class App extends React.Component {
@@ -17,13 +17,12 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    console.log('will mount')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        this.setState({ persons: response.data })
-      })
+    personService
+    .getAll()
+    .then(response => {
+      this.setState({persons: response.data})
+    })
+
   }
 
   handleNameChange = (event) => {
@@ -46,18 +45,15 @@ class App extends React.Component {
     const dup = this.checkDuplicates()
 
     if (!dup) {
-      const persons = this.state.persons.concat(personObject)
-
-      this.setState({
-        persons,
-        newName: '',
-        newPhone: ''
-      })
-
-      axios.post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        console.log(response)
-      })      
+      personService
+        .create(personObject)
+        .then(response => {
+          this.setState({
+            persons: this.state.persons.concat(response.data),
+            newName: '',
+            newPhone: ''
+          })
+        })
     }
   }
 

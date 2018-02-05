@@ -22,13 +22,23 @@ class App extends React.Component {
       name: this.state.newName
     }
   
-    const persons = this.state.persons.concat(personObject)
+    const dup = this.checkDuplicates()
 
-    this.setState({
-      persons,
-      newName: ''
-    })
+    if (!dup) {
+      const persons = this.state.persons.concat(personObject)
+
+      this.setState({
+        persons,
+        newName: ''
+      })
+    }
   }
+
+  checkDuplicates = () => {
+    return this.state.persons.find((p) => {
+      return p.name === this.state.newName
+    })
+  }  
 
   render() {
 

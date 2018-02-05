@@ -1,4 +1,7 @@
 import React from 'react';
+import Person from './components/Person'
+import FilterPerson from './components/FilterPerson'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +13,8 @@ class App extends React.Component {
         }
       ],
       newName: '',
-      newPhone: ''
+      newPhone: '',
+      filterName: ''
     }
   }
 
@@ -20,8 +24,8 @@ class App extends React.Component {
   }
 
   handleNumberChange = (event) => {
-    console.log(event.target.value)
-    this.setState({ newPhone: event.target.value })
+      console.log(event.target.value)
+      this.setState({ newPhone: event.target.value })
   }
 
   addPerson = (event) => {
@@ -55,21 +59,22 @@ class App extends React.Component {
     console.log(this.state.persons)
     return (
       <div>
-        <h2>Puhelinluettelo</h2>       
+        <h2>Puhelinluettelo</h2>
+        <FilterPerson filter={this.state.filterName} />
         <form onSubmit={this.addPerson}>
-          <div>
-            nimi: <input value={this.state.newName} onChange={this.handleNameChange} />
-          </div>
-          <div>
-            numero: <input value={this.state.newPhone} onChange={this.handleNumberChange} />
-          </div>          
-          <div>
-            <button type="submit">lisää</button>
-          </div>
+            <div>
+                nimi: <input value={this.state.newName} onChange={this.handleNameChange} />
+            </div>
+            <div>
+                numero: <input value={this.state.newPhone} onChange={this.handleNumberChange} />
+            </div>          
+            <div>
+                 <button type="submit">lisää</button>
+            </div>
         </form>
         <h2>Numerot</h2>
         <ul>
-          {this.state.persons.map(person => <li key={person.name}>{person.name} - {person.phone}</li>)}
+          <Person person={this.state.persons} />
         </ul>
       </div>
     )

@@ -25,10 +25,11 @@ const Sisalto = (props) => {
   )
 }
 const Yhteensa = (props) => {
-  const [osa1, osa2, osa3] = props.osat
+  const osat = props.osat
+  const maara = osat.reduce((summa, osa) => summa + osa.tehtavia, 0)
   
   return(
-    <p>yhteensä {osa1.tehtavia + osa2.tehtavia + osa3.tehtavia} tehtävää</p>
+    <p>yhteensä {maara} tehtävää</p>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Button = (props) => (
-    <button onClick={props.onClick}>{props.text}</button>
+      <button onClick={props.onClick}>{props.text}</button>
   )
 
 const Statistics = (props) => {
@@ -23,7 +23,9 @@ const Statistics = (props) => {
 }
 
 const Statistic = (props) => (
-    <p>{props.text} {props.value}</p>
+    <tr>
+      <td>{props.text} </td><td> {props.value}</td>
+    </tr>
 )
 
 class App extends React.Component {

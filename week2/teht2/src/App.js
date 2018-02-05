@@ -2,6 +2,9 @@ import React from 'react';
 import Person from './components/Person'
 import FilterPerson from './components/FilterPerson'
 import personService from './services/person'
+import Notification from './components/Notification'
+import './index.css'
+
 
 
 class App extends React.Component {
@@ -11,11 +14,10 @@ class App extends React.Component {
       persons: [],
       newName: '',
       newPhone: '',
-      filterName: ''
+      filterName: '',
+      message: ''
     }
   }
-
-
 
   componentDidMount() {
     personService
@@ -38,7 +40,7 @@ class App extends React.Component {
     event.preventDefault()
     const personObject = {
       name: this.state.newName,
-      phone: this.state.newPhone
+      phone: this.state.newPhone,
     }
   
   
@@ -51,8 +53,12 @@ class App extends React.Component {
           this.setState({
             persons: this.state.persons.concat(response.data),
             newName: '',
-            newPhone: ''
+            newPhone: '',
+            message: 'uusi käyttäjä lisätty'
           })
+          setTimeout(() => {
+            this.setState({message: null})
+          }, 5000)          
         })
     }
   }
@@ -66,6 +72,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {console.log(this.state.message)}
+        <Notification message={this.state.message} />
         <h2>Puhelinluettelo</h2>
         <FilterPerson filter={this.state.filterName} />
         <form onSubmit={this.addPerson}>

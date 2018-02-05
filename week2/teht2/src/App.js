@@ -5,21 +5,30 @@ class App extends React.Component {
     super(props)
     this.state = {
       persons: [
-        { name: 'Arto Hellas' }
+        { name: 'Arto Hellas',
+          phone: '1337'
+        }
       ],
-      newName: ''
+      newName: '',
+      newPhone: ''
     }
   }
 
-  handlePersonChange = (event) => {
+  handleNameChange = (event) => {
     console.log(event.target.value)
     this.setState({ newName: event.target.value })
+  }
+
+  handleNumberChange = (event) => {
+    console.log(event.target.value)
+    this.setState({ newPhone: event.target.value })
   }
 
   addPerson = (event) => {
     event.preventDefault()
     const personObject = {
-      name: this.state.newName
+      name: this.state.newName,
+      phone: this.state.newPhone
     }
   
     const dup = this.checkDuplicates()
@@ -29,7 +38,8 @@ class App extends React.Component {
 
       this.setState({
         persons,
-        newName: ''
+        newName: '',
+        newPhone: ''
       })
     }
   }
@@ -48,15 +58,18 @@ class App extends React.Component {
         <h2>Puhelinluettelo</h2>       
         <form onSubmit={this.addPerson}>
           <div>
-            nimi: <input value={this.state.newName} onChange={this.handlePersonChange} />
+            nimi: <input value={this.state.newName} onChange={this.handleNameChange} />
           </div>
+          <div>
+            numero: <input value={this.state.newPhone} onChange={this.handleNumberChange} />
+          </div>          
           <div>
             <button type="submit">lisää</button>
           </div>
         </form>
         <h2>Numerot</h2>
         <ul>
-          {this.state.persons.map(person => <li key={person.name}>{person.name}</li>)}
+          {this.state.persons.map(person => <li key={person.name}>{person.name} - {person.phone}</li>)}
         </ul>
       </div>
     )

@@ -39,7 +39,7 @@ class App extends React.Component {
     event.preventDefault()
     const personObject = {
       name: this.state.newName,
-      phone: this.state.newPhone,
+      number: this.state.newPhone,
     }
   
   

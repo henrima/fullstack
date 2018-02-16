@@ -23,7 +23,7 @@ const Person = (props) => {
         <ul>
             {props.persons.map(person => 
             <li key={person.name}>
-              {person.name} - {person.phone}
+              {person.name} - {person.number}
               <form onSubmit={handleDeleteButton(person)} person={person}>
                 <button type="submit">poista</button>
               </form>              

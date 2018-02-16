@@ -2,3 +2,4 @@ sandbox/
 **/node_modules
 **/**/node_modules/
 **/**/.env
+**/**/.env.test.local

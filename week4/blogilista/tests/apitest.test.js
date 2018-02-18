@@ -119,6 +119,20 @@ test('a valid blog can be added ', async () => {
     expect(likesOfNew.likes).toBe(0)
   })
 
+  test('title and url are required for new object', async () => {
+    const newBlog = {
+        _id: "5a422bc61b54a676234d17ff",
+        author: "Pepe Willberg",
+        likes: 5,
+        __v: 0
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+  })
+
 afterAll(() => {
   server.close()
 })

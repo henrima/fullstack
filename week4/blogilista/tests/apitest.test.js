@@ -95,6 +95,30 @@ test('a valid blog can be added ', async () => {
     expect(titles).toContainEqual("Peten paluu")
   })
 
+  test('if blog with no likes is added then likes are set to zero ', async () => {
+    const newBlog = {
+        _id: "5a422bc61b54a676234d17fe",
+        title: "Peten paluu2",
+        author: "Pepe Willberg",
+        url: "http://jesjes.com/ml",
+        __v: 0
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  
+    const response = await api
+      .get('/api/blogs')
+  
+    const likesOfNew = response.body[response.body.length-1]
+  
+    expect(likesOfNew.likes).toBeDefined()
+    expect(likesOfNew.likes).toBe(0)
+  })
+
 afterAll(() => {
   server.close()
 })

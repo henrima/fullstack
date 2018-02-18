@@ -32,6 +32,27 @@ describe.only('when there is initially one user at db', async () => {
     const usernames = usersAfterOperation.map(u=>u.username)
     expect(usernames).toContain(newUser.username)
   })
+
+  test('POST /api/users does not succeed with a too short pw', async () => {
+    const usersBeforeOperation = await usersInDb()
+
+    const newUser = {
+      username: 'ahell',
+      name: 'Arto Hellas',
+      password: 'ke'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    const usersAfterOperation = await usersInDb()
+    expect(usersAfterOperation.length).toEqual(usersBeforeOperation.length)
+    const usernames = usersAfterOperation.map(u=>u.username)
+    expect(usernames).not.toContain(newUser.username)
+  })
 })
 
 afterAll(() => {

@@ -2,11 +2,12 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 
 blogsRouter.get('/', async (request, response) => {
-    const blogs = await Blog
-      .find({})
-      .then(blogs => {
-        response.json(blogs)
-      })
+    try {
+      const blogs = await Blog.find({})
+      response.json(blogs)
+    } catch (exception) {
+      response.status(400).json({error: 'priipraa'})
+    }
   })
   
   blogsRouter.post('/', async (request, response) => {

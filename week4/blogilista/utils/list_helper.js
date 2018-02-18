@@ -11,7 +11,14 @@ const totalLikes = (arrayOfBlogs) => {
     )
     return total
 }
+
+const favoriteBlog = (arrayOfBlogs) => {
+    const sortedBlogs = arrayOfBlogs.sort(function(obj1, obj2) {
+        return obj1.likes - obj2.likes
+    })
+    return sortedBlogs[sortedBlogs.length - 1]
+}
   
   module.exports = {
-    dummy, totalLikes
+    dummy, totalLikes, favoriteBlog
   }

@@ -1,5 +1,6 @@
 const dummy = require('../utils/list_helper').dummy
 const totalLikes = require('../utils/list_helper').totalLikes
+const favoriteBlog = require('../utils/list_helper').favoriteBlog
 
 describe('dummy', () => {
 
@@ -86,5 +87,10 @@ describe('total likes', () => {
     test('when list have a lot of blogs it still just werks', () => {
         const result = totalLikes(listWithSomeBlogs)
         expect(result).toBe(36)
+    })
+
+    test('function returns object with most likes', () => {
+        const result = favoriteBlog(listWithSomeBlogs)
+        expect(result.likes).toEqual(Math.max.apply(Math,listWithSomeBlogs.map(function(blog){return blog.likes;})))
     })
   })

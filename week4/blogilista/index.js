@@ -12,7 +12,15 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
-mongoose.connect(config.mongoUrl)
+mongoose
+  .connect(config.mongoUrl)
+  .then( () => {
+    console.log('connected to database', config.mongoUrl)
+  })
+  .catch( err => {
+    console.log(err)
+  })
+  
 mongoose.Promise = global.Promise
 
 app.use('/api/blogs', blogsRouter)

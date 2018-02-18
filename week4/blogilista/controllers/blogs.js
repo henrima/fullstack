@@ -29,4 +29,27 @@ blogsRouter.get('/', async (request, response) => {
     }
   })
 
+  // blogsRouter.put('/:id', (request, response) => {
+  //   const body = request.body
+  
+  //   const blog = {
+  //     _id: blog._id,
+  //     title: blog.title,
+  //     author: blog.author,
+  //     url: blog.url,
+  //     likes: blog.likes,
+  //     __v: blog.__v
+  //   }
+  
+  //   Blog
+  //     .findByIdAndUpdate(request.params.id, blog, { new: true })
+  //     .then(updateBlog => {
+  //       response.json(Blog.format(updateBlog))
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //       response.status(400).send({ error: 'malformatted id' })
+  //     })
+  // })
+
   module.exports = blogsRouter

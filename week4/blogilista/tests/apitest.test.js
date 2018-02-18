@@ -128,7 +128,44 @@ beforeAll(async () => {
         expect(blogsAfterOperation.length).toEqual(blogsAtStart.length-1)
       })
     })
+
+    // describe('update of a blog', async () => {
+    //   let updatedBlog
   
+    //   beforeAll(async () => {
+    //     updatedBlog = new Blog({
+    //       title: "Peten lisays",
+    //       author: "Pepe Willberg",
+    //       url: "http://jesjes.com/ml",
+    //       likes: 5
+    //     })
+    //     await updatedBlog.save()
+    //   })
+  
+    //   test('PUT /api/blogs/:id changes the object', async () => {
+    //     const blogsAtStart = await blogsInTheDb()
+    //     const updatedLikes = updatedBlog.likes + 1
+
+    //     Blog
+    //       .findByIdAndUpdate(updatedBlog._id, updatedBlog, { likes: updatedLikes } )
+    //       .then(updatedNote => {
+    //         response.json(formatNote(updatedNote))
+    //       })
+    //       .catch(error => {
+    //         console.log(error)
+    //         response.status(400).send({ error: 'malformatted id' })
+    //       })
+          
+    //     const blogsAfterOperation = await blogsInTheDb()
+  
+    //     const ids = blogsAfterOperation.map(blog => blog._id)
+  
+    //     expect(ids).not.toContain(updatedBlog._id)
+    //     expect(updatedBlog.likes).toEqual(updatedLikes)
+    //   })
+    // })
+
+
 
 afterAll(() => {
   server.close()

@@ -6,6 +6,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const Blog = require('./models/blog')
 const blogsRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
 const config = require('./utils/config')
 
 app.use(cors())
@@ -20,11 +21,11 @@ mongoose
   .catch( err => {
     console.log(err)
   })
-  
+
 mongoose.Promise = global.Promise
 
 app.use('/api/blogs', blogsRouter)
-
+app.use('/api/users', usersRouter)
 
 const server = http.createServer(app)
 

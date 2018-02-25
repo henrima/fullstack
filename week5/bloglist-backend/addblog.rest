@@ -1,0 +1,9 @@
+POST http://localhost:3005/api/blogs HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "pertsan postaus",
+  "author": "pertsa",
+  "url": "http://pertsa.com",
+  "likes": "42"
+}

@@ -2,7 +2,8 @@ const supertest = require('supertest')
 const { app, server } = require('../index')
 const api = supertest(app)
 const Blog = require('../models/blog')
-const { initialBlogs, format, nonExistingId, blogsInTheDb } = require('./test_helper')
+const User = require('../models/user')
+const { initialBlogs, format, nonExistingId, blogsInTheDb, usersInDb } = require('./test_helper')
 
 
 beforeAll(async () => {
@@ -30,13 +31,15 @@ beforeAll(async () => {
 
   test('a valid blog can be added ', async () => {
       const blogsAtStart = await blogsInTheDb()
+      const usersBeforeOperation = await usersInDb()
+      console.log(usersBeforeOperation[1])
+
       const newBlog = {
-          _id: "5a422bc61b54a676234d17fd",
           title: "Peten paluu",
           author: "Pepe Willberg",
           url: "http://jesjes.com/ml",
           likes: 18,
-          __v: 0
+          user: usersBeforeOperation[1]._id
       }
     
       await api
